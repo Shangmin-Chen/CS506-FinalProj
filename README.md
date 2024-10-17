@@ -4,7 +4,7 @@ Project Proposal:
 
 1. Description of the Project:
 
-We aim to develop a crime predictor model using real-time crime data from the CitizenApp. The goal is to predict the likelihood of specific types of crimes occurring in various neighborhoods based on historical data, time of day, and other environmental factors.
+This project aims to develop a machine learning model capable of predicting crime patterns using data scraped from the Citizen App, complemented by other relevant datasets such as weather data, socioeconomic data, and historical crime reports in the decided locations. The project will identify potential trends and relationships between various factors influencing crime in urban areas.
 2. Clear Goals:
 
 The main objectives of this project are:
@@ -17,20 +17,20 @@ The main objectives of this project are:
 
 We will be collecting the following data:
 
-    Historical crime data: This data can be scraped from CitizenApp using their public crime reports.
+    Crime data: This data can be scraped from CitizenApp using their public crime reports. Data will include type of crime and response time from authorities.
     Location data: GPS coordinates of where crimes occurred.
     Temporal data: Date, time of day, and day of the week.
-    Additional factors: Weather data, neighborhood features (e.g., residential or commercial areas).
+    Additional factors: Weather data, neighborhood features (e.g., residential or commercial areas), population density.
 
 Data will be collected via web scraping tools or APIs like https://stevesie.com/apps/citizen-api. If needed, we will use publicly available datasets from government sources like the FBI or local police departments to complement the CitizenApp data.
 4. Data Modeling:
 
 The modeling will involve:
 
-    Clustering methods to identify crime hotspots.
+    Logistic regression or random forest will be used as a baseline model.
     Time series analysis to predict crime trends over time.
-    Classification models (e.g., decision trees, random forests, or XGBoost) to predict specific types of crimes.
-    Potential use of deep learning models like LSTM (Most likely because we are doing time series) or CNNs if the data size justifies it.
+    Regression models (e.g. random forests, or XGBoost) to predict crime count or crime severity given features such as time of day, location, etc.
+    Potential use of deep learning models like LSTM (for time series data), or geospatial decision trees (for geographical information).
 
 5. Data Visualization:
 
@@ -49,3 +49,4 @@ We will implement the following testing strategy:
     Split the data into a training set (5/7) and a test set (2/7) randomly (2 days from each week goes into Testing, and the rest goes into training).
     Cross-validation to fine-tune the model parameters.
     Time-based splitting: We may train the model on data from the past months and test it on the most recent data to mimic real-world predictive scenarios.
+
