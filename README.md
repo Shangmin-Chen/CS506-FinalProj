@@ -50,9 +50,11 @@ We plan to visualize the data using:
 Figure 1. Treemap of major crime incident reports in Boston. The top 5 crime incidents are: investigate person, sick assist, motor vehicle leaving scene with property damage, investigate property, and towed motor vehicle. 
 
 ![dav_vs_night_incident](https://github.com/user-attachments/assets/19a59f80-ea29-495e-9d52-076687bff4be)
+
 Figure 2. Incident count in the day vs. night. There have been around 60,000 incident reports from 2023 to the present in the night time, and around 80,000 reports in the day time. 
 
 ![density_plot_incidents](https://github.com/user-attachments/assets/5db904a0-b472-4f08-a567-abfdcc560135)
+
 Figure 3. Density plot of incident reports. We see that there is a larger density of incident reports around long. -71.05 and lat. 42.35. 
 
 6. Test Plan:
