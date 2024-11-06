@@ -1,6 +1,8 @@
 # CS506 Mid-semester Report #
 
 CS506 MIDWAY REPORT VIDEO LINK: https://youtu.be/UaxeT2Xs02E
+
+
 Project Proposal:
 
 1. Description of the Project:
