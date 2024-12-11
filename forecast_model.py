@@ -6,15 +6,20 @@ import joblib
 import os
 
 if __name__ == "__main__":
-    # Load and preprocess data
+    # Load and preprocess daily counts by district
     daily_counts = load_and_preprocess_data()
 
     # Create the forecasts directory if it doesn't exist
     os.makedirs("forecasts", exist_ok=True)
 
-    # Define training cutoff dates
+    # Define training and testing cutoff dates
     train_start = pd.Timestamp("2023-01-01")
-    train_end = pd.Timestamp("2024-05-31")  # Up to and including May 2024
+    train_end = pd.Timestamp("2024-05-31")  # Training through end of May 2024
+    test_end = pd.Timestamp("2024-10-31")   # Test through end of October 2024
+
+    # Future forecasting period (2 months): December 2024 and January 2025
+    future_start = pd.Timestamp("2024-12-01")
+    future_end = pd.Timestamp("2025-01-31")
 
     # Get unique districts
     districts = daily_counts['DISTRICT'].unique()
@@ -27,12 +32,12 @@ if __name__ == "__main__":
         df.rename(columns={'DATE': 'ds', 'COUNT': 'y'}, inplace=True)
         df['ds'] = pd.to_datetime(df['ds'])
 
-        # Filter the data to ensure we only consider data starting from January 2023
+        # Filter data from train_start
         df = df[df['ds'] >= train_start]
 
         # Split data into training and testing based on the specified cutoff
         train_df = df[(df['ds'] >= train_start) & (df['ds'] <= train_end)]
-        test_df = df[df['ds'] > train_end]
+        test_df = df[(df['ds'] > train_end) & (df['ds'] <= test_end)]
 
         # Check if we have enough training data
         if len(train_df) < 10:
@@ -43,39 +48,49 @@ if __name__ == "__main__":
         model = Prophet(yearly_seasonality=True, weekly_seasonality=True, daily_seasonality=False)
         model.fit(train_df)
 
-        # Forecast the length of the test period
+        # Forecast for the test period
         if not test_df.empty:
-            # The number of days in the test set
-            forecast_days = (test_df['ds'].max() - train_end).days
-            # If test_df isn't empty but only has one day or is non-continuous,
-            # adjust as needed. Here we assume continuous daily data.
-            if forecast_days < 1:
-                # If there's data after train_end but no full day difference, default to 30 days
-                forecast_days = 30
+            # Calculate how many days to forecast for the test set
+            forecast_days_test = (test_df['ds'].max() - train_end).days
+            if forecast_days_test < 1:
+                forecast_days_test = 30
         else:
-            # If there's no test data at all, just forecast 30 days beyond train_end
-            forecast_days = 30
+            # No test data, just forecast 30 days beyond train_end
+            forecast_days_test = 30
 
-        future = model.make_future_dataframe(periods=forecast_days)
-        forecast = model.predict(future)
+        future_test = model.make_future_dataframe(periods=forecast_days_test)
+        forecast_test = model.predict(future_test)
 
-        # Ensure date formats align
-        test_df['ds'] = pd.to_datetime(test_df['ds'])
-        forecast['ds'] = pd.to_datetime(forecast['ds'])
-
-        # Merge forecast with test data (if test data is available)
+        # Evaluate on test data if available
         if not test_df.empty:
-            merged = pd.merge(test_df, forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']], on='ds', how='left')
+            merged = pd.merge(test_df, forecast_test[['ds', 'yhat', 'yhat_lower', 'yhat_upper']], on='ds', how='left')
             mae = (merged['y'] - merged['yhat']).abs().mean()
-            print(f"District {district} - Mean Absolute Error (Test): {mae:.2f}")
+            print(f"District {district} - Mean Absolute Error (Test: June-Oct 2024): {mae:.2f}")
             merged.to_csv(f"forecasts/{district}_test_results.csv", index=False)
         else:
             print(f"No test data available after May 2024 for district {district}.")
-            # If no test data, we won't compute MAE or save test results
             merged = None
 
-        # Save model and forecast
+        # Save model and forecast for the test period
+        forecast_test.to_csv(f"forecasts/{district}_forecast.csv", index=False)
         joblib.dump(model, f"forecasts/{district}_prophet_model.joblib")
-        forecast.to_csv(f"forecasts/{district}_forecast.csv", index=False)
+        print(f"Test period forecast saved for district {district}.")
 
-        print(f"Forecast saved for district {district}.")
+        # Now forecast the next 2 months (Dec 2024 & Jan 2025)
+        # Calculate total days from train_end to future_end
+        total_days_future = (future_end - train_end).days
+        if total_days_future < 1:
+            print("Future end date is before training end date, adjust your dates.")
+            continue
+
+        future_all = model.make_future_dataframe(periods=total_days_future)
+        forecast_future = model.predict(future_all)
+
+        # Filter forecast to only Dec 2024 and Jan 2025
+        forecast_2months = forecast_future[(forecast_future['ds'] >= future_start) & (forecast_future['ds'] <= future_end)]
+        print(f"Predictions for {district} (December 2024 - January 2025):")
+        print(forecast_2months[['ds', 'yhat', 'yhat_lower', 'yhat_upper']])
+
+        # Optionally, save the long-term forecast
+        forecast_2months.to_csv(f"forecasts/{district}_2months_future_forecast.csv", index=False)
+        print(f"2-month future forecast saved for district {district}.")

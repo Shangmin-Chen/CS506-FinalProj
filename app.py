@@ -218,6 +218,19 @@ def run_district_analysis():
                 test_fig = px.scatter(test_results, x='ds', y='y', title='Actual vs Predicted Counts', labels={'ds': 'Date', 'y': 'Actual Count'})
                 test_fig.add_scatter(x=test_results['ds'], y=test_results['yhat'], mode='lines', name='Predicted')
                 st.plotly_chart(test_fig, use_container_width=True)
+
+                future_file = f"forecasts/{district}_2months_future_forecast.csv"
+                if os.path.exists(future_file):
+                    st.subheader("2-Month Future Forecast (Dec 2024 - Jan 2025)")
+                    future_forecast = pd.read_csv(future_file)
+                    # Display a line chart or a table
+                    fig_future = px.line(future_forecast, x='ds', y='yhat', title='Future Forecasted Crime Counts')
+                    fig_future.add_scatter(x=future_forecast['ds'], y=future_forecast['yhat_lower'], mode='lines', name='Lower Bound', line=dict(dash='dot'))
+                    fig_future.add_scatter(x=future_forecast['ds'], y=future_forecast['yhat_upper'], mode='lines', name='Upper Bound', line=dict(dash='dot'))
+                    st.plotly_chart(fig_future, use_container_width=True)
+                else:
+                    st.info("No future forecast file found for this district.")
+                
             else:
                 st.write(f"No data available for district {district}.")
         else:
