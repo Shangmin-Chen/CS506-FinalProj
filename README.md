@@ -93,31 +93,36 @@ Figure 5. Forecasted crime counts for December 2024 to January 2025 in a selecte
 
 ## Crime Type Analysis ##
 
-In this subsection, we examine specific crime types — larceny-shoplifting — as examples. The analysis includes the following:
+In this subsection, we examine specific crime types — larceny-shoplifting — as examples. Utilizing the DBSCAN clustering algorithm, the script identifies densely populated crime hotspots by analyzing the geographical coordinates of incidents. From these clusters, it selects the top hotspots for further examination. For each prominent cluster, the code employs the Prophet forecasting model to predict future crime occurrences, providing valuable insights into potential trends. Finally, the pipeline culminates in generating visualizations: it produces time series plots illustrating the forecasted crime counts and creates detailed geospatial maps that highlight the identified crime hotspots against a contextual basemap. The analysis includes the following:
 
-1. **Forecast Graph:** This graph shows the forecasted counts for the selected crime types. It is similar to the district-based forecast but focuses on specific crime categories.
+1. **Forecast Graph:** This graph shows the forecasted counts for the selected crime types. It is similar to the district-based forecast but focuses on specific crime categories. 
 
    ![Forecasted Crime Count for Larceny and Shoplifting](images/forecast-1.png)
+   Figure 6. Forecasted crime counts for larceny-shoplifting from January 2023 to January 2025. The black dots represent the actual values, while the blue line indicates the prediction.
 
-   For the forecast from January 2023 to January 2025, the black dots represent the actual values, while the blue line indicates the prediction. We observe that near the end of the forecast period, there is no data available, but the prediction continues to follow the established trend, demonstrating the model's ability to extrapolate based on historical patterns.
+   We observe that near the end of the forecast period, there is no data available, but the prediction continues to follow the established trend, demonstrating the model's ability to extrapolate based on historical patterns.
 
 
-2. **Time Series Graph:** This graph displays the historical trends in the selected crime types, providing insights into temporal patterns.
+3. **Time Series Graph:** This graph displays the historical trends in the selected crime types, providing insights into temporal patterns.
 
    ![Time Series for Larceny and Shoplifting](images/time-series.png)
-
-   The graph spans from January 2023 to January 2025 and breaks down the time series data into three components:
+   Figure 7. Time series plots decompose the historical crime data to reveal underlying patterns and trends. The graph spans from January 2023 to January 2025 and breaks down the time series data into three components:
 
    - **Trend:** This shows the long-term increase or decrease in crime counts, reflecting broader changes over the forecast period.
    - **Weekly:** This highlights patterns that repeat on a weekly basis, such as higher or lower crime rates on specific days of the week.
    - **Yearly:** This captures recurring annual patterns, showing how crime counts fluctuate over the course of a year.
 
+    By analyzing these components, analysts can forecast future crime occurrences, understand seasonal influences, and identify long-term shifts in crime dynamics. This temporal analysis is crucial for strategic planning and implementing timely interventions.
 
-3. **Clustering Graph:** This map highlights the areas with the highest density of the selected crime types. The clustering is ranked from 0 (most dense) to 9 (least dense).
+   
+
+
+5. **Clustering Graph:** This map highlights the areas with the highest density of the selected crime types. The top 5 clusters are extracted using DBSCAN. The clustering is ranked from 0 (most dense) to 9 (least dense).
 
    ![Cluster Density Map](images/density.png)
+   Figure 8. Geospatial map that highlights the identified crime hotspots against a contextual basemap.
 
-   In this map, we observe that the area near Newbury Street has the highest cluster density for shoplifting, which aligns with its status as a popular shopping hotspot. Conversely, areas like Mission Hill, which are primarily residential, exhibit much lower density, reflecting the different socio-economic and activity patterns of these locations.
+   In this map, we observe that the area near Newbury Street has the highest cluster density for shoplifting, which aligns with its status as a popular shopping hotspot. Conversely, areas like Mission Hill, which are primarily residential, exhibit much lower density, reflecting the different socio-economic and activity patterns of these locations. This map utilizes basemap providers like Stamen Toner-Lite or OpenStreetMap Mapnik through the contextily library to overlay crime data points accurately onto the map.
 
 
 # Achieving Our Goals # 
