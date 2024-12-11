@@ -1,6 +1,6 @@
 # CS506 Final Project Report #
 
-# Data Description, Relevance, And Provenance# 
+# Data Description, Relevance, And Provenance # 
 
 The data for this project is sourced from publicly available datasets provided on the Boston.gov website. Initially, our project proposal included plans to web-scrape the Citizen App for real-time crime data. However, after submitting the Midterm Report, we identified several challenges with this approach. Firstly, we realized that predicting crime trends and hot spots requires a substantial historical dataset, far exceeding the 1.5 months of data since the semester elapsed. Secondly, the process of scraping Citizen App data and converting HAR files to CSV format introduced numerous formatting issues, which compromised data reliability and usability. Upon further analysis, we determined that the publicly available datasets, which encompass a comprehensive record of crimes across Boston, were far more suitable for our objectives. This adjustment allowed us to leverage a richer dataset, facilitating more accurate and meaningful predictions while avoiding unnecessary preprocessing complications. This shift also ensures that our analysis aligns with standardized, verified data sources, enhancing the reliability of our results.
 
