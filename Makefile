@@ -1,6 +1,9 @@
-install:
+venv:
 	python3.10 -m venv venv
-	. venv/bin/activate && pip install -r requirements.txt
+	@echo "Run '. venv/bin/activate' to activate the virtual environment."
+	
+install:
+	pip install -r requirements.txt
 
 forecast:
 	python3 forecast_model.py
