@@ -19,15 +19,19 @@ For each district, the trained model generates forecasts for the testing period 
 Figure 1. Treemap of major crime incident reports in Boston. The top 5 crime incidents are: investigate person, sick assist, motor vehicle leaving scene with property damage, investigate property, and towed motor vehicle. 
 
 ![Districts in Boston](images/map.png)
+
 Figure 2. Map of Boston segmented into its respective districts. This visualization highlights the geographic boundaries of each district, providing spatial context for the analysis of crime data. 
 
 ![Forcasted Crime Count](images/newplot.jpeg)
+
 Figure 3. Forecasted crime counts for January 2023 to October 2024, showing predicted values with upper and lower confidence bounds. The solid line represents the predicted crime counts, while the dotted lines indicate the upper and lower limits of the forecast. The results reveal consistent periodic patterns of criminal activity, with counts generally ranging between 10 and 20 incidents, and peaks occasionally nearing 25. The relatively narrow confidence intervals demonstrate a high level of confidence in the model’s predictions, suggesting that the crime patterns exhibit strong seasonal or cyclical trends over the observed period. This analysis provides valuable insights into temporal crime dynamics, which can aid in strategic resource allocation and planning.
 
 ![Actual vs. Predicted Counts](images/newplot-2.jpeg)
+
 Figure 4. Actual vs. predicted crime counts for the testing period (June 2024 to October 2024). The scatter plot represents actual crime counts, while the solid line illustrates the model’s predicted values. The model captures the overall trend in crime activity, aligning closely with the general pattern of incidents. However, some deviations between actual and predicted values are observed, particularly during spikes or drops in crime counts, highlighting the variability in criminal activity and the need for further refinement in capturing anomalies.
 
 ![Future Forecased Crime Count](images/newplot-3.jpeg)
+
 Figure 5. Forecasted crime counts for December 2024 to January 2025 in a selected Boston district (D14). The predictions show periodic fluctuations, with crime counts ranging from 10 to 20 incidents and occasional peaks approaching 25. The solid line represents the predicted values, while the dotted lines indicate the upper and lower confidence intervals. These trends suggest a consistent pattern of criminal activity during the forecasted period, providing valuable insights for resource planning and allocation.
 
 # Achieving Our Goals # 
