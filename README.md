@@ -93,7 +93,7 @@ Figure 5. Forecasted crime counts for December 2024 to January 2025 in a selecte
 
 ## Crime Type Analysis ##
 
-In this subsection, we examine specific crime types—larceny and shoplifting—as examples. The analysis includes the following:
+In this subsection, we examine specific crime types — larceny-shoplifting — as examples. The analysis includes the following:
 
 1. **Forecast Graph:** This graph shows the forecasted counts for the selected crime types. It is similar to the district-based forecast but focuses on specific crime categories.
 
