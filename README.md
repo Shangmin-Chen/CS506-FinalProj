@@ -97,14 +97,14 @@ In this subsection, we examine specific crime types—larceny and shoplifting—
 
 1. **Forecast Graph:** This graph shows the forecasted counts for the selected crime types. It is similar to the district-based forecast but focuses on specific crime categories.
 
-   ![Forecasted Crime Count for Larceny and Shoplifting](images/forecast-1.jpeg)
+   ![Forecasted Crime Count for Larceny and Shoplifting](images/forecast-1.png)
 
    For the forecast from January 2023 to January 2025, the black dots represent the actual values, while the blue line indicates the prediction. We observe that near the end of the forecast period, there is no data available, but the prediction continues to follow the established trend, demonstrating the model's ability to extrapolate based on historical patterns.
 
 
 2. **Time Series Graph:** This graph displays the historical trends in the selected crime types, providing insights into temporal patterns.
 
-   ![Time Series for Larceny and Shoplifting](images/time-series.jpeg)
+   ![Time Series for Larceny and Shoplifting](images/time-series.png)
 
    The graph spans from January 2023 to January 2025 and breaks down the time series data into three components:
 
@@ -115,7 +115,7 @@ In this subsection, we examine specific crime types—larceny and shoplifting—
 
 3. **Clustering Graph:** This map highlights the areas with the highest density of the selected crime types. The clustering is ranked from 0 (most dense) to 9 (least dense).
 
-   ![Cluster Density Map](images/density.jpeg)
+   ![Cluster Density Map](images/density.png)
 
    In this map, we observe that the area near Newbury Street has the highest cluster density for shoplifting, which aligns with its status as a popular shopping hotspot. Conversely, areas like Mission Hill, which are primarily residential, exhibit much lower density, reflecting the different socio-economic and activity patterns of these locations.
 
