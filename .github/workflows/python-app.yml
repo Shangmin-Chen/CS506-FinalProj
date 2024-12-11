@@ -38,4 +38,4 @@ jobs:
       run: |
         make install
         make forecast
-        make run_dashboard
+        make run_dashboard & sleep 30
